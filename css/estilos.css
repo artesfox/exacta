@@ -1,0 +1,538 @@
+/* =========================================================
+   Exacta – Talento de Excelencia
+   Hoja de estilos moderna (mismo diseño, código actualizado)
+   ========================================================= */
+
+:root {
+  --naranja: #ff6600;
+  --naranja-claro: #ff7b24;
+  --naranja-oscuro: #db5800;
+  --naranja-linea: #fc6f03;
+  --texto: #3f3d43;
+  --texto-suave: #535058;
+  --titulo: #7d7986;
+  --subtitulo: #85818d;
+  --pie: #3c3b42;
+  --blanco: #ffffff;
+  --ancho: 990px;
+  --alto-header: 84px;
+  --fuente-titulos: "Roboto Condensed", Arial, Helvetica, sans-serif;
+  --fuente-texto: Verdana, Geneva, Arial, Helvetica, sans-serif;
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--fuente-texto);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--texto);
+  background: var(--blanco);
+  -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main { flex: 1; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+a { color: var(--naranja); text-decoration: none; transition: color .25s; }
+a:hover { color: var(--naranja-oscuro); }
+
+.contenedor {
+  width: min(100% - 32px, var(--ancho));
+  margin-inline: auto;
+}
+
+/* ---------- Tipografía ---------- */
+h1, h2, h3, h4, h5, h6 { font-family: var(--fuente-titulos); font-weight: 700; margin: 0 0 .6em; }
+
+h2 {
+  font-size: 32px;
+  line-height: 1.15;
+  color: var(--titulo);
+  text-transform: uppercase;
+}
+
+.destacado {
+  font-family: var(--fuente-titulos);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.35;
+  color: var(--subtitulo);
+  text-transform: uppercase;
+  margin: 0 0 1em;
+}
+
+h5 {
+  font-size: 16px;
+  color: var(--naranja);
+  text-transform: uppercase;
+  margin-top: 1.4em;
+  margin-bottom: .3em;
+}
+
+p { margin: 0 0 1em; }
+
+/* =========================================================
+   Cabecera
+   ========================================================= */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--blanco);
+  height: var(--alto-header);
+  transition: height .35s var(--ease), box-shadow .35s;
+}
+.header.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, .08);
+}
+
+.header .contenedor {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.logo img {
+  width: 210px;
+}
+
+/* Menú escritorio */
+.menu ul {
+  list-style: none;
+  display: flex;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+}
+
+.menu a {
+  position: relative;
+  display: block;
+  padding: 14px 21px;
+  font-family: var(--fuente-titulos);
+  font-size: 15px;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+  color: var(--texto);
+  border-radius: 10px;
+  overflow: hidden;
+  isolation: isolate;
+  transition: color .3s;
+}
+
+/* Relleno naranja que sube al pasar el mouse */
+.menu a::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to bottom, var(--naranja-claro), var(--naranja) 50%, var(--naranja-oscuro));
+  transform: translateY(101%);
+  transition: transform .35s var(--ease);
+}
+.menu a:hover, .menu a.activo { color: var(--blanco); }
+.menu a:hover::before, .menu a.activo::before { transform: translateY(0); }
+
+/* Botón hamburguesa (solo móvil) */
+.btn-menu {
+  display: none;
+  width: 46px;
+  height: 46px;
+  border: 0;
+  border-radius: 6px;
+  background: var(--naranja);
+  cursor: pointer;
+  position: relative;
+  z-index: 70;
+}
+.btn-menu span,
+.btn-menu span::before,
+.btn-menu span::after {
+  position: absolute;
+  left: 50%;
+  width: 22px;
+  height: 2px;
+  margin-left: -11px;
+  background: var(--blanco);
+  border-radius: 2px;
+  transition: transform .35s var(--ease), background .2s;
+}
+.btn-menu span { top: 50%; margin-top: -1px; }
+.btn-menu span::before, .btn-menu span::after { content: ""; left: 0; margin-left: 0; }
+.btn-menu span::before { transform: translateY(-7px); }
+.btn-menu span::after { transform: translateY(7px); }
+
+.menu-abierto .btn-menu span { background: transparent; }
+.menu-abierto .btn-menu span::before { transform: rotate(45deg); }
+.menu-abierto .btn-menu span::after { transform: rotate(-45deg); }
+
+.velo { display: none; }
+
+/* =========================================================
+   Hero (portada) – banda naranja
+   ========================================================= */
+.hero {
+  background: var(--naranja);
+  color: var(--blanco);
+  overflow: hidden;
+}
+
+.hero .contenedor {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  min-height: 384px;
+}
+
+.hero-texto {
+  padding: 82px 15px 56px 0;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+}
+
+.hero h1 {
+  font-size: 30px;
+  line-height: 1.12;
+  letter-spacing: -.3px;
+  text-transform: uppercase;
+  color: var(--blanco);
+  margin-bottom: .45em;
+}
+
+.hero .telefono { font-size: 18px; margin: 0; }
+.hero .telefono a { color: var(--blanco); border-bottom: 1px dashed rgba(255, 255, 255, .6); }
+.hero .telefono a:hover { border-bottom-style: solid; }
+
+.hero .respaldo {
+  margin-top: auto;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: Georgia, "Times New Roman", serif;
+}
+
+.hero-imagen {
+  display: flex;
+  justify-content: center;
+  padding-top: 14px;
+}
+
+/* Animación horizontal de lado a lado */
+.hero-imagen img {
+  width: 497px;
+  animation: vaiven 6s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes vaiven {
+  0%, 100% { transform: translateX(-28px); }
+  50%      { transform: translateX(28px); }
+}
+
+/* Banner de páginas internas */
+.banner {
+  background: linear-gradient(to bottom, var(--naranja) 0 72%, var(--blanco) 72% 100%);
+  padding-top: 14px;
+}
+.banner figure {
+  margin: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: 0 18px 40px -18px rgba(0, 0, 0, .35);
+}
+.banner img {
+  width: 100%;
+  transform: scale(1.06);
+  animation: zoomSuave 1.6s var(--ease) forwards;
+}
+@keyframes zoomSuave { to { transform: scale(1); } }
+
+/* =========================================================
+   Contenido
+   ========================================================= */
+.seccion { padding: 58px 0 40px; }
+.seccion.interna { padding-top: 34px; }
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 40px;
+}
+
+.tarjeta { display: flex; flex-direction: column; }
+
+/* Barra naranja superior que se dibuja */
+.tarjeta::before {
+  content: "";
+  display: block;
+  width: 262px;
+  max-width: 100%;
+  height: 10px;
+  background: var(--naranja-linea);
+  margin-bottom: 26px;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform .9s var(--ease) .15s;
+}
+.tarjeta.visible::before { transform: scaleX(1); }
+
+.tarjeta .foto {
+  overflow: hidden;
+  border-radius: 2px;
+  margin-bottom: 20px;
+  aspect-ratio: 3 / 2;
+}
+.tarjeta .foto img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .7s var(--ease);
+}
+.tarjeta:hover .foto img { transform: scale(1.07); }
+
+.tarjeta p:last-of-type { margin-bottom: 1.4em; }
+
+/* Botón */
+.boton {
+  display: inline-block;
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 8px 16px;
+  font-family: var(--fuente-texto);
+  font-size: 14px;
+  color: #fefbfb;
+  background: linear-gradient(to bottom, var(--naranja-claro), var(--naranja) 50%, var(--naranja-oscuro));
+  border: 0;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, .22);
+  cursor: pointer;
+  transition: transform .25s var(--ease), box-shadow .25s, filter .25s;
+}
+.boton:hover {
+  color: var(--blanco);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px -6px rgba(255, 102, 0, .65);
+  filter: brightness(1.05);
+}
+.boton:active { transform: translateY(0); }
+
+/* Lista de sectores */
+.lista-sectores { list-style: none; padding: 0; margin: 0 0 1.2em; }
+.lista-sectores li {
+  position: relative;
+  padding: 5px 0 5px 22px;
+}
+.lista-sectores li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 9px;
+  height: 9px;
+  background: var(--naranja);
+  border-radius: 2px;
+}
+
+/* =========================================================
+   Contacto
+   ========================================================= */
+.formulario label {
+  display: block;
+  font-weight: bold;
+  margin: 14px 0 6px;
+}
+.formulario input,
+.formulario textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--texto);
+  background: #fafafa;
+  border: 1px solid #d6d4da;
+  border-radius: 4px;
+  transition: border-color .25s, box-shadow .25s, background .25s;
+}
+.formulario textarea { min-height: 130px; resize: vertical; }
+.formulario input:focus,
+.formulario textarea:focus {
+  outline: none;
+  background: var(--blanco);
+  border-color: var(--naranja);
+  box-shadow: 0 0 0 3px rgba(255, 102, 0, .18);
+}
+.formulario .boton { margin-top: 18px; padding: 10px 28px; }
+
+.aviso {
+  padding: 14px 18px;
+  border-radius: 4px;
+  margin-bottom: 18px;
+  font-weight: bold;
+}
+.aviso.ok { background: #e9f7ee; color: #1e6b3a; border-left: 4px solid #2e9d58; }
+.aviso.error { background: #fdecea; color: #a12a1b; border-left: 4px solid #e04429; }
+
+/* Campo trampa anti-spam: invisible para personas */
+.trampa { position: absolute; left: -9999px; }
+
+/* =========================================================
+   Pie de página
+   ========================================================= */
+.footer {
+  background: var(--pie);
+  color: #e6e5e8;
+  text-align: center;
+  font-size: 13px;
+  padding: 22px 0;
+}
+.footer p { margin: 0; line-height: 1.25; }
+.footer a { color: #ff7b5a; }
+.footer a:hover { color: var(--blanco); }
+
+/* =========================================================
+   Animaciones de carga y aparición
+   ========================================================= */
+.entrada {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: aparecer .9s var(--ease) forwards;
+  animation-delay: var(--retardo, 0s);
+}
+@keyframes aparecer { to { opacity: 1; transform: none; } }
+
+.header .logo { animation: aparecerIzq .8s var(--ease) both; }
+.menu li { animation: aparecerArriba .6s var(--ease) both; }
+.menu li:nth-child(1) { animation-delay: .10s; }
+.menu li:nth-child(2) { animation-delay: .18s; }
+.menu li:nth-child(3) { animation-delay: .26s; }
+.menu li:nth-child(4) { animation-delay: .34s; }
+.menu li:nth-child(5) { animation-delay: .42s; }
+
+@keyframes aparecerIzq { from { opacity: 0; transform: translateX(-24px); } }
+@keyframes aparecerArriba { from { opacity: 0; transform: translateY(-14px); } }
+
+/* La imagen del hero entra desde la derecha y luego empieza el vaivén */
+.hero-imagen { animation: entrarDerecha 1.1s var(--ease) .35s both; }
+@keyframes entrarDerecha { from { opacity: 0; transform: translateX(80px); } }
+
+/* Elementos que aparecen al hacer scroll */
+.revelar {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity .9s var(--ease), transform .9s var(--ease);
+  transition-delay: var(--retardo, 0s);
+}
+.revelar.visible { opacity: 1; transform: none; }
+
+/* Sin JavaScript todo debe verse */
+.no-js .revelar { opacity: 1; transform: none; }
+.no-js .tarjeta::before { transform: none; }
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+@media (max-width: 900px) {
+  .hero h1 { font-size: 26px; }
+  .hero-imagen img { width: 420px; }
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 760px) {
+  .logo img { width: 190px; }
+
+  .btn-menu { display: block; }
+
+  /* Menú lateral que entra suave desde la derecha */
+  .menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 60;
+    width: min(80vw, 300px);
+    height: 100vh;
+    height: 100dvh;
+    padding: 96px 0 24px;
+    background: var(--blanco);
+    box-shadow: -10px 0 40px rgba(0, 0, 0, .18);
+    transform: translateX(105%);
+    visibility: hidden;
+    transition: transform .45s var(--ease), visibility 0s linear .45s;
+  }
+  .menu-abierto .menu {
+    transform: translateX(0);
+    visibility: visible;
+    transition: transform .45s var(--ease), visibility 0s;
+  }
+
+  .menu ul { flex-direction: column; gap: 0; }
+  .menu li { animation: none; }
+  .menu a {
+    margin: 2px 14px;
+    padding: 15px 18px;
+    font-size: 16px;
+    opacity: 0;
+    transform: translateX(30px);
+    transition: color .3s, opacity .4s var(--ease), transform .4s var(--ease);
+  }
+  .menu a::before { transform: translateX(-101%); }
+  .menu a:hover::before, .menu a.activo::before { transform: translateX(0); }
+
+  .menu-abierto .menu a { opacity: 1; transform: none; }
+  .menu-abierto .menu li:nth-child(1) a { transition-delay: .12s; }
+  .menu-abierto .menu li:nth-child(2) a { transition-delay: .18s; }
+  .menu-abierto .menu li:nth-child(3) a { transition-delay: .24s; }
+  .menu-abierto .menu li:nth-child(4) a { transition-delay: .30s; }
+  .menu-abierto .menu li:nth-child(5) a { transition-delay: .36s; }
+
+  .velo {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 45;
+    background: rgba(28, 27, 29, .45);
+    backdrop-filter: blur(2px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .45s var(--ease);
+  }
+  .menu-abierto .velo { opacity: 1; pointer-events: auto; }
+  .menu-abierto { overflow: hidden; }
+
+  .hero .contenedor { grid-template-columns: 1fr; min-height: 0; }
+  .hero-texto { padding: 28px 0 8px; }
+  .hero .respaldo { margin-top: 18px; }
+  .hero-imagen img { width: min(100%, 400px); }
+  @keyframes vaiven {
+    0%, 100% { transform: translateX(-14px); }
+    50%      { transform: translateX(14px); }
+  }
+
+  .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  .seccion { padding-top: 40px; }
+  h2 { font-size: 27px; }
+}
+
+/* Respeta a quienes piden menos movimiento en su sistema */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
